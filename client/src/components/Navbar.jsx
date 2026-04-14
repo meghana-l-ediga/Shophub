@@ -2,12 +2,10 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-
 export default function Navbar() {
   const navigate = useNavigate();
-  // Get user from localStorage
+  // localStorage
   const user = JSON.parse(localStorage.getItem("user"));
-
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -51,7 +49,7 @@ useEffect(() => {
         <Link to="/settings" style={styles.link}>⚙️Settings</Link>
         <Link to="/sell" style={styles.link}> 📦Sell</Link>
 
-{/* Logout Button (only if logged in) */}
+{/* Logout Button  */}
  {user ? (
   <button style={styles.logout} onClick={handleLogout}>
     Logout

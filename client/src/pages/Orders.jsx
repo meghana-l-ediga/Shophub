@@ -8,7 +8,7 @@ export default function Orders() {
 
   const styles = {
     page: {
-      background: "linear-gradient(to right, #9f7fd9, #d950d2)", // light gradient
+      background: "linear-gradient(to right, #9f7fd9, #d950d2)", 
       minHeight: "100vh",
       paddingBottom: "30px"
     },

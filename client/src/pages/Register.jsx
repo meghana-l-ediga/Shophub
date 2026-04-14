@@ -25,7 +25,7 @@ const handleSubmit = async () => {
     if (res.ok) {
       alert("Registered Successfully 🎉");
 
-      // ✅ SAVE USER
+      // SAVE USER
       localStorage.setItem("user", JSON.stringify(data));
 
       navigate("/home");
@@ -99,12 +99,12 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    background: "linear-gradient(to right, #7d43e1, #49bde3, #392fa8)", // richer gradient
+    background: "linear-gradient(to right, #7d43e1, #49bde3, #392fa8)",
     fontFamily: "'Poppins', sans-serif"
   },
 
   card: {
-    background: "linear-gradient(to right, #ee86a2, #c0ec7e, #e13eb9)", // glass effect
+    background: "linear-gradient(to right, #ee86a2, #c0ec7e, #e13eb9)", 
     backdropFilter: "blur(12px)",
     padding: "35px",
     borderRadius: "16px",
@@ -131,7 +131,7 @@ const styles = {
   btn: {
     width: "100%",
     padding: "12px",
-    background: "linear-gradient(to right, #FF6F61, #FF9966)", // gradient button 🔥
+    background: "linear-gradient(to right, #FF6F61, #FF9966)", 
     color: "white",
     border: "none",
     borderRadius: "8px",

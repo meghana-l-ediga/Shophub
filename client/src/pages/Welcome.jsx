@@ -95,7 +95,7 @@ floatingIcons: {
   alignItems: "center",
   fontSize: "32px",
   opacity: 0.15,
-  pointerEvents: "none", // 👈 prevents blocking clicks
+  pointerEvents: "none", 
   zIndex: 0,
   animation: "floatIcons 15s ease-in-out infinite"
 },

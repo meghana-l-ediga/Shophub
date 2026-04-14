@@ -8,14 +8,14 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [suggestions, setSuggestions] = useState([]);
-const [wishlist, setWishlist] = useState(
+  const [wishlist, setWishlist] = useState(
   JSON.parse(localStorage.getItem("wishlist")) || []
 );
 const navigate = useNavigate();
 
 const user = JSON.parse(localStorage.getItem("user"));
 
-// 🔥 Fetch Products (MULTI API)
+// Fetch Products
 useEffect(() => {
   const getProducts = async () => {
     try {
@@ -52,7 +52,7 @@ useEffect(() => {
   getProducts();
 }, []);
 
-  // 🔍 Search
+  // Search
   const handleSearch = () => {
     const filtered = products.filter(p =>
       p.title.toLowerCase().includes(search.toLowerCase())
@@ -61,7 +61,7 @@ useEffect(() => {
     setSuggestions([]);
   };
 
-  // 🗂️ Category Filter
+  // Category Filter
   const handleCategory = (cat) => {
     setCategory(cat);
 
@@ -161,13 +161,13 @@ const editProduct = (product) => {
 };
 
 const uploadProduct = async (title, price, image) => {
-  // 🔐 Check login
+  //  Check login
   if (!user) {
     alert("Please login first");
     return;
   }
 
-  // ⚠️ Validate fields
+  // Validate fields
   if (!title || !price || !image) {
     alert("Fill all fields");
     return;
@@ -212,7 +212,7 @@ const escuela = d3.map((p) => ({
   }
 };
 
-  // 🛍️ Create product
+  //  Create product
   const newProduct = {
     title,
     price,
@@ -221,7 +221,7 @@ const escuela = d3.map((p) => ({
   };
 
   try {
-    // ☁️ SEND TO BACKEND
+    // SEND TO BACKEND
     await fetch("http://localhost:5000/api/products/add", {
       method: "POST",
       headers: {
@@ -255,7 +255,7 @@ const escuela = d3.map((p) => ({
         <h2>🛍️ Explore Products</h2>
       </div>
 
-      {/* 🔍 Search */}
+      {/*  Search */}
       <div style={styles.searchBox}>
         <input
           placeholder="Search products..."
@@ -283,7 +283,7 @@ const escuela = d3.map((p) => ({
 )}
       </div>
 
-      {/* 🗂️ Categories */}
+      {/*  Categories */}
       <div style={styles.categories}>
         {categories.map(cat => (
           <button
@@ -296,7 +296,7 @@ const escuela = d3.map((p) => ({
         ))}
       </div>
 
-  {/* 🛍️ Products */}
+  {/*  Products */}
 <div style={styles.grid}>
   {products.length === 0 ? (
     <p>No products found</p>
@@ -312,7 +312,7 @@ const escuela = d3.map((p) => ({
         <p>₹{p.price}</p>
 
         <button onClick={(e) => {
-          e.stopPropagation(); // 🔥 important
+          e.stopPropagation(); 
           addToCart(p);
         }}>
           🛒 Add to Cart
@@ -341,7 +341,7 @@ const escuela = d3.map((p) => ({
 
 const styles = {
   container: {
-    background: "linear-gradient(to left, #9f7fd9, #d950d2)", // deep premium bg
+    background: "linear-gradient(to left, #9f7fd9, #d950d2)", 
     minHeight: "100vh",
     fontFamily: "'Poppins', sans-serif"
   },
@@ -399,7 +399,7 @@ const styles = {
   },
 
   card: {
-    background: "rgba(255,255,255,0.08)", // glass card
+    background: "rgba(255,255,255,0.08)", 
     backdropFilter: "blur(12px)",
     padding: "15px",
     borderRadius: "16px",

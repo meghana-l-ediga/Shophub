@@ -26,7 +26,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* ✅ Auto redirect */}
+        {/*  Auto redirect */}
         <Route
           path="/"
           element={isLoggedIn ? <Navigate to="/home" /> : <Welcome />}
@@ -35,7 +35,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 <Route path="/home" element={<Home />} />
-        {/* ✅ Protected routes */}
+        {/*  Protected routes */}
         <Route
           path="/home"
           element={isLoggedIn ? <Home /> : <Navigate to="/" />}

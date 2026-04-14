@@ -5,20 +5,20 @@
   100% { background-position: 0% 50%; }
 }
 
-/* ✨ Fade animation */
+/*  Fade animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 🪄 Floating logo */
+/*  Floating logo */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
 }
 
-/* 💥 Button effects */
+/*  Button effects */
 .btn {
   padding: 12px;
   border: none;

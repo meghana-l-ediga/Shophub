@@ -20,7 +20,7 @@ useEffect(() => {
 const handlePayment = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // 🔹 Create order from backend
+  //  Create order from backend
   const res = await fetch("http://localhost:5000/api/payment/create-order", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -28,10 +28,10 @@ const handleLogin = async () => {
     const result = await res.json();
 
     if (result.message === "Login successful") {
-      // ✅ Save user from DB
+      // Save user from DB
       localStorage.setItem("user", JSON.stringify(result.user));
 
-      // ✅ Go to Home
+      //  Go to Home
       navigate("/home");
     } else {
       alert("Invalid email or password ❌");

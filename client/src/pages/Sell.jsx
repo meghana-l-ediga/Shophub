@@ -11,13 +11,13 @@ if (!user) {
   return <h2 style={{ textAlign: "center" }}>Please login to sell products</h2>;
 }
 
-  // 📷 Convert image to base64
+  // Convert image to base64
   const handleImage = (e) => {
     const file = e.target.files[0];
 
     const reader = new FileReader();
     reader.onloadend = () => {
-      setImage(reader.result); // base64 image
+      setImage(reader.result); 
     };
 
     if (file) reader.readAsDataURL(file);

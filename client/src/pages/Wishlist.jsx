@@ -101,13 +101,13 @@ const styles = {
   price: {
     fontSize: "18px",
     fontWeight: "bold",
-    color: "#e53935", // red for wishlist vibe ❤️
+    color: "#e53935", 
     marginTop: "5px"
   },
 
   btn: {
     padding: "8px 14px",
-    background: "linear-gradient(to right, #ff416c, #ff4b2b)", // stylish red gradient
+    background: "linear-gradient(to right, #ff416c, #ff4b2b)",
     color: "#fff",
     border: "none",
     borderRadius: "20px",

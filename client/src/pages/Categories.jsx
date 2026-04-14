@@ -1,4 +1,3 @@
-// pages/Categories.jsx
 import Navbar from "../components/Navbar";
 
 export default function Categories() {

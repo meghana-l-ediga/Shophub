@@ -37,7 +37,7 @@ export default function Profile() {
 const styles = {
   page: {
     minHeight: "100vh",
-    background: "linear-gradient(to left, #9f7fd9, #d950d2)", // premium bg
+    background: "linear-gradient(to left, #9f7fd9, #d950d2)", 
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
