@@ -1,0 +1,113 @@
+/* 🔥 Gradient animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ✨ Fade animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🪄 Floating logo */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* 💥 Button effects */
+.btn {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login {
+  background: #2874f0;
+}
+
+.register {
+  background: #ff9f00;
+}
+
+.btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+@keyframes floatIcons {
+  100% { transform: translateY(20px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(20px); }
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.addBtn {
+  background: #ff9f00;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.addBtn:hover {
+  background: #fb641b;
+  transform: scale(1.05);
+}
+.catBtn {
+  margin: 5px;
+  padding: 8px 12px;
+  border: none;
+  background: #2874f0;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.suggestionBox {
+  width: 300px;
+  background: white;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  position: absolute;
+  z-index: 10;
+}
+
+.suggestionItem {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes floatIcons {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
