@@ -12,7 +12,7 @@ export default function Welcome() {
   if (loading) {
     return (
       <div style={styles.loaderContainer}>
-        <h1 style={styles.loaderText}>🛍️ ShopHub</h1>
+        <h1 style={styles.loaderText}> </h1>
         <div style={styles.loader}></div>
       </div>
     );

@@ -8,48 +8,134 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [suggestions, setSuggestions] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [wishlist, setWishlist] = useState(
   JSON.parse(localStorage.getItem("wishlist")) || []
+
 );
 const navigate = useNavigate();
 
-const user = JSON.parse(localStorage.getItem("user"));
 
+const user = JSON.parse(localStorage.getItem("user"));
+const artisanCategories = [
+  "Handmade Jewellery",
+  "Pottery",
+  "Handicrafts",
+  "Handloom",
+  "Paintings",
+  "Wooden Artifacts",
+  "Sculptures",
+  "Traditional Clothing"
+];
+
+const artisanImages = [
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+  "https://images.unsplash.com/photo-1589128777073-263566ae5e4d",
+  "https://images.unsplash.com/photo-1582582429416-5c5fbe7b5c9e",
+  "https://images.unsplash.com/photo-1618354691373-d851c5c3a990",
+  "https://images.unsplash.com/photo-1504198458649-3128b932f49b",
+  "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
+  "https://images.unsplash.com/photo-1600585154341-be6161a56a0c",
+  "https://images.unsplash.com/photo-1589128777072-263566ae5e4d",
+  "https://images.unsplash.com/photo-1582582429417-5c5fbe7b5c9e",
+  "https://images.unsplash.com/photo-1618354691374-d851c5c3a990",
+  "https://images.unsplash.com/photo-1504198458648-3128b932f49b",
+  "https://images.unsplash.com/photo-1522335789204-aabd1fc54bc9"
+];
+
+const artisanNames = [
+  "Necklace",
+  "Clay Pot",
+  "Wall Art",
+  "Saree",
+  "Painting",
+  "Wood Craft",
+  "Bracelet",
+  "Decor Item"
+];
+
+const generateProducts = () => {
+  let data = [];
+
+  for (let i = 1; i <= 200; i++) {
+    data.push({
+      id: i,
+      title: `Handmade ${artisanNames[i % artisanNames.length]} ${i}`,
+      price: Math.floor(Math.random() * 2000) + 200,
+      image: artisanImages[i % artisanImages.length],
+      category: artisanCategories[i % artisanCategories.length],
+      seller: "Artisan " + (i % 10 + 1)
+    });
+  }
+
+  return data;
+};
 // Fetch Products
 useEffect(() => {
   const getProducts = async () => {
     try {
-      const [d1, d3] = await Promise.all([
-        fetch("https://dummyjson.com/products?limit=100").then(res => res.json()),
-        fetch("https://api.escuelajs.co/api/v1/products").then(res => res.json())
-      ]);
+      // 🔥 fetch dummyjson
+      const res1 = await fetch("https://dummyjson.com/products?limit=50");
+      const data1 = await res1.json();
 
-      const dummy = d1.products.map(p => ({
-        id: p.id,
-        title: p.title,
-        price: p.price,
-        image: p.thumbnail,
-        category: p.category
-      }));
-      const escuela = d3.map(p => ({
-        id: p.id,
-        title: p.title,
-        price: p.price,
-        image: p.images[0],
-        category: p.category?.name || "other"
-      }));
+      // 🔥 fetch escuela
+      const res2 = await fetch("https://api.escuelajs.co/api/v1/products");
+      const data2 = await res2.json();
+
+      console.log("API1:", data1);
+      console.log("API2:", data2);
+
+      const generalCategories = [
+  "Electronics",
+  "Fashion",
+  "Home",
+  "Beauty"
+];
+
+const dummy = data1.products.map((p, i) => ({
+  id: p.id + 1000,
+  title: p.title,
+  price: p.price,
+  image: p.thumbnail || "https://via.placeholder.com/150",
+  category: "Electronics",
+  seller: "Store"
+}));
+
+const escuela = data2.map((p, i) => ({
+  id: p.id + 2000,
+  title: p.title,
+  price: p.price,
+  image: p.images?.[0] || "https://via.placeholder.com/150",
+  category: "Fashion",
+  seller: "Store"
+}));
+
+     const handmadeProducts = generateProducts();
       const custom = JSON.parse(localStorage.getItem("customProducts")) || [];
 
-      setProducts([...dummy, ...escuela, ...custom]);
+      const finalData = [
+        ...dummy,
+        ...escuela,
+        ...handmadeProducts,
+        ...custom
+      ];
+
+      setProducts(finalData);
+      setAllProducts(finalData);
 
     } catch (err) {
-      console.log("Error:", err);
-      const user = JSON.parse(localStorage.getItem("user"));
+      console.log("ERROR:", err);
+
+      // fallback if API fails
+      const handmadeProducts = generateProducts();
+      const custom = JSON.parse(localStorage.getItem("customProducts")) || [];
+
+      setProducts([...handmadeProducts, ...custom]);
+      setAllProducts([...handmadeProducts, ...custom]);
     }
-    
   };
 
-  getProducts();
+  getProducts(); // ✅ OUTSIDE catch
 }, []);
 
   // Search
@@ -66,24 +152,29 @@ useEffect(() => {
     setCategory(cat);
 
     if (cat === "All") {
-      window.location.reload();
-    } else {
-      const filtered = products.filter(p =>
-        p.category?.toLowerCase().includes(cat.toLowerCase())
-      );
-      setProducts(filtered);
-    }
+  setProducts(allProducts); // we will fix below
+} else {
+  const filtered = allProducts.filter(p => p.category === cat);
+  setProducts(filtered);
+}
   };
 
   const categories = [
     "All",
-    "Smartphones",
-    "Laptops",
-    "Electronics",
-    "Jewelery",
-    "Men",
-    "Women",
-    "Groceries  "
+    "Handmade Jewellery",
+    "Handloom",
+    "Pottery",
+    "Handicrafts",
+    "Paintings",
+    "ClayPottery",
+    "Wooden Artifacts",
+    "Sculptures",
+    "Traditional Clothing", 
+    "General",
+  "Electronics",
+  "Fashion",
+  "Home",
+  "Beauty"
   ];
 
   const handleInputChange = (e) => {
@@ -172,45 +263,6 @@ const uploadProduct = async (title, price, image) => {
     alert("Fill all fields");
     return;
   }
-  const getProducts = async () => {
-  try {
-    const [d1, d3, backend] = await Promise.all([
-      fetch("https://dummyjson.com/products?limit=100").then(res => res.json()),
-      fetch("https://api.escuelajs.co/api/v1/products").then(res => res.json()),
-      fetch("http://localhost:5000/api/products").then(res => res.json())
-    ]);
-
-   const dummy = d1.products.map((p) => ({
-  id: p.id,
-  title: p.title,
-  price: p.price,
-  image: p.thumbnail,
-  category: p.category
-}));
-
-const escuela = d3.map((p) => ({
-  id: p.id,
-  title: p.title,
-  price: p.price,
-  image: p.images[0],
-  category: p.category?.name || "other"
-}));
-
-    const dbProducts = backend.map(p => ({
-      id: p._id,
-      title: p.title,
-      price: p.price,
-      image: p.image,
-      category: "custom",
-      seller: p.seller
-    }));
-
-    setProducts([...dummy, ...escuela, ...dbProducts]);
-
-  } catch (err) {
-    console.log(err);
-  }
-};
 
   //  Create product
   const newProduct = {
@@ -237,19 +289,18 @@ const escuela = d3.map((p) => ({
   }
 
   await fetch(`http://localhost:5000/api/orders/update/`, {
-  method: "PUT",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ status: "Shipped" })
-});
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: "Shipped" })
+  });
 };
+console.log("TOTAL PRODUCTS:", products.length);
 
   return (
     <div style={styles.container}>
       <Navbar />
-      <img
-  src="https://rukminim2.flixcart.com/fk-p-flap/1600/270/image/banner.jpg"
-  style={{ width: "100%", marginBottom: "20px" }}
-/>
+      
+
 
       <div style={styles.header}>
         <h2>🛍️ Explore Products</h2>
@@ -289,12 +340,15 @@ const escuela = d3.map((p) => ({
           <button
             key={cat}
             onClick={() => handleCategory(cat)}
-            className="catBtn"
+            style={styles.catBtn}
           >
             {cat}
           </button>
         ))}
       </div>
+      
+
+ 
 
   {/*  Products */}
 <div style={styles.grid}>
@@ -334,9 +388,9 @@ const escuela = d3.map((p) => ({
     ))
   )}
 </div>
-  </div>
-);
-};
+    </div>
+  );
+}
 
 
 const styles = {
@@ -374,7 +428,7 @@ const styles = {
   },
 
   searchBtn: {
-    background: "linear-gradient(to right, #ff7e5f, #feb47b)",
+    background: "linear-gradient(to right, #db4c28, #cd1539)",
     color: "white",
     padding: "10px 18px",
     border: "none",
@@ -386,9 +440,25 @@ const styles = {
 
   categories: {
     textAlign: "center",
-    margin: "15px",
+    background: "linear-gradient(to right, #d712bd,#ae2ac8)",
+    padding: "15px",
+    borderRadius: "50px",
+    margin: "0 20px 30px",
+    boxShadow: "0 4px 12px rgba(255,153,102,0.5)",
     color: "#ddd",
     fontSize: "15px"
+  },
+  catBtn: {
+    background: "linear-gradient(to right, #db2846, #e3440f)",
+    color: "white",
+    padding: "8px 14px",
+    border: "1px solid rgba(255,126,95,0.5)",
+    borderRadius: "20px",
+    cursor: "pointer",
+    fontSize: "13px",
+    fontWeight: "500",
+    boxShadow: "0 4px 12px rgba(255,126,95,0.5)"
+     
   },
 
   grid: {
@@ -422,7 +492,7 @@ const styles = {
   },
 
   addBtn: {
-    background: "linear-gradient(to right, #00c6ff, #0072ff)",
+    background: "linear-gradient(to right, #ff003c, #ffa200)",
     color: "white",
     border: "none",
     padding: "8px 14px",

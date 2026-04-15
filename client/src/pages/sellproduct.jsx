@@ -59,7 +59,7 @@ import Navbar from "../components/Navbar";
 
         <input
           name="title"
-          placeholder="Product Name"
+          placeholder=" Handmade Product Name"
           onChange={handleChange}
           style={styles.input}
         />
